@@ -20,7 +20,7 @@ class Representative < ApplicationRecord
       already_exists = Representative.find_or_create_by(name: official.name, ocdid: ocdid_temp) do |rep|
         rep.title = title_temp
       end
-      
+
       reps.push(already_exists)
     end
 
