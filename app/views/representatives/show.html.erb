@@ -1,0 +1,14 @@
+<div class="container mt-3">
+  <div class="card">
+    <img class="card-img-top" src="<%= @representative.photo_url %>" alt="Representative Photo">
+    <div class="card-body">
+      <h5 class="card-title"><%= @representative.name %></h5>
+      <h6 class="card-subtitle mb-2 text-muted"><%= @representative.title %></h6>
+      <p class="card-text">
+        Party: <%= @representative.party %><br>
+        Address: <%= @representative.address %>, <%= @representative.city %>, <%= @representative.state %> <%= @representative.zip %>
+      </p>
+      <%= link_to 'View News Articles', representative_news_items_path(@representative.id), class: 'btn btn-primary' %>
+    </div>
+  </div>
+</div>
