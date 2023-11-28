@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe SearchController, type: :controller do
-  context 'GET #search' do
+  context 'when do GET #search' do
     let(:civic_info_service_double) { nil }
 
     describe 'Test Connection' do
@@ -22,7 +24,7 @@ RSpec.describe SearchController, type: :controller do
     #     get :search, params: { address: test_address }
     #     expect(assigns(:representatives)).not_to be_nil
     #     expect(response.status).to eq(200)
-    #   end 
+    #   end
     # end
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # spec/controllers/map_controller_spec.rb
 require 'rails_helper'
 
@@ -9,7 +11,8 @@ RSpec.describe MapController, type: :controller do
     end
 
     it 'assigns @states and @states_by_fips_code' do
-      states = [State.create!(name: 'California', symbol: 'CA', fips_code: 6, is_territory: 0, lat_min: 0, lat_max: 0, long_min: 0, long_max: 0)]
+      states = [State.create!(name: 'California', symbol: 'CA', fips_code: 6, is_territory: 0, lat_min: 0, lat_max: 0,
+                              long_min: 0, long_max: 0)]
       get :index
       expect(assigns(:states)).to match_array(states)
       expect(assigns(:states_by_fips_code)).to eq(states.index_by(&:std_fips_code))
@@ -18,7 +21,10 @@ RSpec.describe MapController, type: :controller do
 
   describe 'GET #state' do
     context 'when state exists' do
-      let!(:state) { State.create!(name: 'California', symbol: 'CA', fips_code: 6, is_territory: 0, lat_min: 0, lat_max: 0, long_min: 0, long_max: 0) }
+      let!(:state) do
+        State.create!(name: 'California', symbol: 'CA', fips_code: 6, is_territory: 0,
+                      lat_min: 0, lat_max: 0, long_min: 0, long_max: 0)
+      end
 
       it 'assigns @state and renders the state template' do
         get :state, params: { state_symbol: state.symbol }
@@ -37,7 +43,10 @@ RSpec.describe MapController, type: :controller do
   end
 
   describe 'GET #county' do
-    let!(:state) { State.create!(name: 'California', symbol: 'CA', fips_code: 6, is_territory: 0, lat_min: 0, lat_max: 0, long_min: 0, long_max: 0) }
+    let!(:state) do
+      State.create!(name: 'California', symbol: 'CA', fips_code: 6, is_territory: 0,
+                    lat_min: 0, lat_max: 0, long_min: 0, long_max: 0)
+    end
     let!(:county) { County.create!(name: 'Los Angeles', state: state, fips_code: 6037, fips_class: 'H1') }
 
     context 'when state and county exist' do
