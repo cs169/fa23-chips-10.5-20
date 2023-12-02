@@ -252,3 +252,34 @@ end
 Then /^show me the page$/ do
   save_and_open_page
 end
+
+Given("the following states exist:") do |table|
+  table.hashes.each do |state|
+    State.create!(name: state[:name], symbol: state[:symbol], fips_code: state[:fips_code])
+  end
+end
+
+Given("the following counties exist:") do |table|
+  table.hashes.each do |county_hash|
+    state = State.find_by(symbol: county_hash[:state])
+    County.create!(name: county_hash[:name], state: state, fips_code: county_hash[:fips_code])
+  end
+end
+
+Given("I am on the state map page for {string}") do |state_name|
+  visit state_map_path(State.find_by(name: state_name).symbol)
+end
+
+When("I click on {string} county in the map") do |county_name|
+  # This will depend on how your map is structured. You might need to find the SVG element for the county and simulate a click.
+  find("svg[data-county-name='#{county_name}']").click
+end
+
+Then("I should be on the search page for {string}") do |location|
+  expect(page.current_url).to include("/search?address=#{location}")
+end
+
+Then("I should see representatives for {string}") do |county_name|
+  # Check that representatives for the county are displayed
+  expect(page).to have_content("Representatives for #{county_name}")
+end

@@ -15,6 +15,7 @@ class SearchController < ApplicationController
                   end
 
     # Removed commented out code for clarity
+    # byebug
     result = service.representative_info_by_address(address: address)
     @representatives = Representative.civic_api_to_representative_params(result)
 
