@@ -13,5 +13,7 @@
                 %li.nav-item.py-1.text-center{ class: ApplicationHelper.active(controller_name, item[:link]) }
                     %a.nav-link.text-white{ href: item[:link].to_s }
                         = item[:title]
-                        - if current_page? item[:link]
-                            %span.sr-only (current)
+            -# Add Campaign Finances link here
+            %li.nav-item.py-1.text-center{ class: ApplicationHelper.active(controller_name, campaign_finances_path) }
+                %a.nav-link.text-white{ href: campaign_finances_path }
+                    Campaign Finances
