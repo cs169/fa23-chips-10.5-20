@@ -1,0 +1,23 @@
+.row
+    .col-md-8.offset-md-2
+        %h1.text-center Campaign Finances Search
+
+        = form_tag campaign_finances_display_path, method: :get, class: 'my-4' do
+            .form-group
+                %label Select Election Cycle
+                = select_tag :cycle,
+                options_for_select(%w[2020 2018 2016 2014 2012 2010]), class: 'form-control'
+
+            .form-group
+                %label Select Financial Category
+                = select_tag :category, options_for_select([['Candidate Loan', 'candidate-loan'],
+                  ['Contribution Total', 'contribution-total'],
+                  ['Debts Owed', 'debts-owed'],
+                  ['Disbursements Total', 'disbursements-total'],
+                  ['End Cash', 'end-cash'],
+                  ['Individual Total', 'individual-total'],
+                  ['PAC Total', 'pac-total'],
+                  ['Receipts Total', 'receipts-total'],
+                  ['Refund Total', 'refund-total']]), class: 'form-control'
+
+            = submit_tag 'Search', class: 'btn btn-primary mt-3'

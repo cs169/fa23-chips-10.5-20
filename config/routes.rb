@@ -9,12 +9,15 @@ Rails.application.routes.draw do
     get '/auth/github/callback', to: 'login#github', as: :github_callback
     get '/logout' => 'login#logout', :as => :logout
     get '/user/profile', to: 'user#profile', as: :user_profile
-    
+
     root to: 'map#index', as: 'root'
     get '/state/:state_symbol' => 'map#state', :as => :state_map
     get '/state/:state_symbol/county/:std_fips_code' => 'map#county', :as => :county
 
     get '/ajax/state/:state_symbol' => 'ajax#counties'
+
+    get 'campaign_finances', to: 'campaign_finances#index'
+    get 'campaign_finances/display', to: 'campaign_finances#display'
 
     # Routes for Events
     resources :events, only: %i[index show]

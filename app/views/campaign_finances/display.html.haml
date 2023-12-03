@@ -1,0 +1,24 @@
+.container-fluid
+    .row
+        .col-md-12
+            %h1.text-center Campaign Finances Results
+            .table-responsive-md.pt-5
+                %table.table.table-striped.table-hover
+                    %caption Table of Campaign Finances
+                    %thead.thead-dark
+                        %tr
+                            %th Name
+                            %th Party
+                            %th State
+                            %th Total Contributions
+                            %th Total Disbursements
+                            %th End Cash
+                    %tbody
+                        - @finance_records.each do |candidate|
+                            %tr
+                                %td= candidate.name
+                                %td= candidate.party
+                                %td= candidate.state
+                                %td= number_to_currency(candidate.total_contributions)
+                                %td= number_to_currency(candidate.total_disbursements)
+                                %td= number_to_currency(candidate.end_cash)
