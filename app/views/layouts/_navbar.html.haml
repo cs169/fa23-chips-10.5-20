@@ -15,15 +15,3 @@
                         = item[:title]
                         - if current_page? item[:link]
                             %span.sr-only (current)
-            - if authenticated
-                %li.nav-item.py-1.text-center{ class: ApplicationHelper.active(controller_name, user_profile_path) }
-                    %a.nav-link.text-white{ href: user_profile_path }
-                        Profile
-                        - if current_page? user_profile_path
-                            %span.sr-only (current)
-            - else
-                %li.nav-item.py-1.text-center{ class: ApplicationHelper.active(controller_name, login_path) }
-                    %a.nav-link.text-white{ href: login_path }
-                        Login
-                        - if current_page? login_path
-                            %span.sr-only (current)
