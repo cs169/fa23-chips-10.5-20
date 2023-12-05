@@ -252,3 +252,31 @@ end
 Then /^show me the page$/ do
   save_and_open_page
 end
+
+When /^I click on the county "([^"]*)"$/ do |county_name|
+  # Assuming each county path element has an id or data attribute
+  script = <<-JS
+    var county = document.querySelector('[data-county-name="#{county_name}"]');
+    if (county) {
+      county.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+    }
+  JS
+  page.execute_script(script)
+end
+
+
+
+Given /that I am on state (.*) on map/ do |state|
+end
+
+When /I click on (.*)/ do |county|
+  county = URI::Parser.new.escape(county)
+  visit "/search/#{county}"
+end
+
+Then /I should see (.*) in the list of representatives/ do |rep_names_list|
+  rep_names = rep_names_list.split(',')
+  rep_names.each do |rep_name|
+    expect(page).to have_content(rep_name)
+  end
+end
